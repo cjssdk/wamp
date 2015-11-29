@@ -1,0 +1,20 @@
+{
+	"name": "wampi",
+	"version": "1.0.0",
+	"description": "Web Application Messaging Protocol Implementation.",
+	"author": {
+		"name": "Stanislav Kalashnik",
+		"email": "sk@infomir.eu"
+	},
+	"repository": "DarkPark/wampi",
+	"dependencies": {
+		"stb-emitter": "1.*.*"
+	},
+	"devDependencies": {},
+	"keywords": [
+		"websocket",
+		"protocol",
+		"wamp"
+	],
+	"license": "GPL-3.0"
+}
