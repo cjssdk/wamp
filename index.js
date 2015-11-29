@@ -17,32 +17,6 @@ var Emitter   = require('stb-emitter'),
  *
  * @see http://wamp-proto.org/
  * @constructor
- *
- * @example
- * var ws    = new WebSocket('ws://echo.websocket.org'),
- *     wampi = new Wampi(ws);
- *
- * wampi.socket.onopen = function() {
- *     // send message to execute remotely
- *     wampi.call('getInfo', {id: 128}, function ( error, result ) {
- *         // handle execution result
- *     });
- *
- *     // serve remote request
- *     wampi.addListener('setTime', function ( params, callback ) {
- *         // handle request ...
- *         // send back results to the sender
- *         callback(null, requestedData);
- *     });
- *
- *     // send notification with some optional data
- *     wampi.call('onUserUpdate', newUserData);
- *
- *     // serve received notification
- *     wampi.addListener('onUserUpdate', function ( event ) {
- *         // handle notification data ...
- *     });
- * };
  */
 function Wampi ( socket ) {
 	var self = this;
