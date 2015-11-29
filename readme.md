@@ -66,7 +66,7 @@ wampi.addListener('onUserUpdate', function ( event ) {
 });
 ```
 
-To catch the moment when WebSocket connection is ready use:
+Catch the moment when WebSocket connection is ready:
 
 ```js
 wampi.socket.onopen = function() {
