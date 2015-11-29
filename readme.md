@@ -45,7 +45,7 @@ wampi.call('getInfo', {id: 128}, function ( error, result ) {
 Serve remote request:
 
 ```js
-wampi.addListener('setTime', function ( params, callback ) {
+wampi.addListener('getData', function ( params, callback ) {
 	// handle request ...
 	// send back results to the sender
 	callback(null, requestedData);
@@ -73,6 +73,13 @@ wampi.socket.onopen = function() {
 	// send or receive messages here
 };
 ```
+
+#### Error codes
+
+ Value  | Message          | Description
+--------|------------------|-------------
+ -32700 | Parse error      | Invalid JSON data was received.
+ -32600 | Invalid Request  | The JSON sent is not a valid Request object.
 
 
 ## Contribution ##
