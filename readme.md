@@ -6,7 +6,7 @@ Web Application Messaging Protocol Implementation
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-blue.svg?style=flat-square)](https://gitter.im/DarkPark/stb)
 
 
-[WAMP](http://wamp-proto.org/) lightweight implementation for both browser and server-side.
+[WAMP](http://wamp-proto.org/) lightweight implementation for both browser and server-side (with [ws](https://www.npmjs.com/package/ws) npm package).
 
 `wampi` extends [Emitter](https://github.com/stbsdk/emitter) interface.
 It does not create any WebSocket connections but uses existing one.
@@ -74,7 +74,7 @@ wampi.socket.onopen = function() {
 };
 ```
 
-Server-side example:
+Server-side example with [ws](https://www.npmjs.com/package/ws) npm package:
 
 ```js
 var server = new require('ws').Server({port: 9000}),
