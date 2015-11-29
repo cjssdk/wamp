@@ -74,6 +74,21 @@ wampi.socket.onopen = function() {
 };
 ```
 
+Server-side example:
+
+```js
+var server = new require('ws').Server({port: 9000}),
+	Wampi  = require('wampi');
+
+server.on('connection', function ( connection ) {
+	var wampi = new Wampi(connection);
+
+	wampi.call('getInfo', {id: 128}, function ( error, result ) {
+    	// handle execution result
+    });
+});
+```
+
 #### Error codes
 
  Value  | Message          | Description
