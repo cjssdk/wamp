@@ -43,6 +43,11 @@ function Wampi ( socket ) {
 }
 
 
+// inheritance
+Wampi.prototype = Object.create(Emitter.prototype);
+Wampi.prototype.constructor = Wampi;
+
+
 /**
  * Internal method to handle messages.
  *
@@ -124,11 +129,6 @@ Wampi.prototype.call = function ( method, params, callback ) {
 
 	this.socket.send(JSON.stringify(message));
 };
-
-
-// inheritance
-Wampi.prototype = Object.create(Emitter.prototype);
-Wampi.prototype.constructor = Wampi;
 
 
 // public
