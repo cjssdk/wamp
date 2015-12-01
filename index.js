@@ -15,6 +15,8 @@ var Emitter   = require('stb-emitter'),
 /**
  * Lightweight WAMP implementation based on WebSockets.
  *
+ * @param {WebSocket} socket link to socket connection to wrap
+ *
  * @see http://wamp-proto.org/
  * @constructor
  */
@@ -24,7 +26,6 @@ function Wampi ( socket ) {
 	// parent constructor call
 	Emitter.call(this);
 
-	// link to WebSocket connection
 	this.socket = socket;
 
 	if ( 'on' in socket ) {
@@ -54,6 +55,8 @@ Wampi.prototype.constructor = Wampi;
  * @private
  */
 Wampi.prototype.router = function ( message ) {
+	var self = this;
+
 	try {
 		message = JSON.parse(message);
 	} catch ( e ) {
@@ -82,7 +85,7 @@ Wampi.prototype.router = function ( message ) {
 		// execute incoming method and report to sender
 		if ( this.events[message.method] ) {
 			this.emit(message.method, message.params, function ( error, result ) {
-				this.socket.send(JSON.stringify({
+				self.socket.send(JSON.stringify({
 					jsonrpc: '2.0',
 					error: error,
 					result: result,
