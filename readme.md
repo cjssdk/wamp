@@ -95,6 +95,7 @@ server.on('connection', function ( connection ) {
 --------|------------------|-------------
  -32700 | Parse error      | Invalid JSON data was received.
  -32600 | Invalid Request  | The JSON sent is not a valid Request object.
+ -32601 | Method not found | The method does not exist / is not available.
 
 
 ## Contribution ##

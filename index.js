@@ -27,18 +27,16 @@ function Wampi ( socket ) {
 	// link to WebSocket connection
 	this.socket = socket;
 
-	// desktop browser
-	if ( 'onmessage' in socket ) {
+	if ( 'on' in socket ) {
+		// server-side
+		socket.on('message', function ( message ) {
+			self.router(message);
+		});
+	} else if ( 'onmessage' in socket ) {
+		// desktop browser
 		socket.onmessage = function ( event ) {
 			self.router(event.data);
 		};
-	}
-
-	// server-side
-	if ( 'on' in socket ) {
-		socket.on('message', function ( event ) {
-			self.router(event.data);
-		});
 	}
 }
 
@@ -67,7 +65,7 @@ Wampi.prototype.router = function ( message ) {
 		return;
 	}
 
-	if ( message.id && !message.method ) {
+	if ( 'id' in message && !('method' in message) ) {
 		// incoming answer for previous request
 		if ( message.id in callbacks ) {
 			callbacks[message.id](message.error, message.result);
@@ -75,12 +73,12 @@ Wampi.prototype.router = function ( message ) {
 		} else {
 			// no callback registered for this id
 		}
-	} else if ( !message.id && message.method ) {
+	} else if ( !('id' in message) && 'method' in message ) {
 		// incoming notification
 		if ( this.events[message.method] ) {
 			this.emit(message.method, message.params);
 		}
-	} else if ( message.id && message.method ) {
+	} else if ( 'id' in message && 'method' in message ) {
 		// execute incoming method and report to sender
 		if ( this.events[message.method] ) {
 			this.emit(message.method, message.params, function ( error, result ) {
@@ -91,6 +89,13 @@ Wampi.prototype.router = function ( message ) {
 					id: message.id
 				}));
 			});
+		} else {
+			// wrong method
+			this.socket.send(JSON.stringify({
+				jsonrpc: '2.0',
+				error: {code: -32601, message: 'Method not found'},
+				id: message.id
+			}));
 		}
 	} else {
 		// wrong request
