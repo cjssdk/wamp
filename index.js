@@ -111,11 +111,11 @@ Wamp.prototype.router = function ( message ) {
 
 
 /**
- * Send message to execute remotely or notify.
+ * Send message to execute remotely or notify (without `callback` argument).
  *
  * @param {string} method procedure or event name
- * @param {*} params procedure associated data
- * @param {function} callback remote call results handler
+ * @param {*} [params] procedure associated data
+ * @param {function} [callback] remote call results handler
  */
 Wamp.prototype.call = function ( method, params, callback ) {
 	var message = {
