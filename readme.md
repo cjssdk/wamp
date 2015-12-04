@@ -1,21 +1,21 @@
-Web Application Messaging Protocol Implementation
-=================================================
+WAMP Implementation
+===================
 
-[![NPM version](https://img.shields.io/npm/v/wampi.svg?style=flat-square)](https://www.npmjs.com/package/wampi)
-[![Dependencies Status](https://img.shields.io/david/DarkPark/wampi.svg?style=flat-square)](https://david-dm.org/DarkPark/wampi)
-[![Gitter](https://img.shields.io/badge/gitter-join%20chat-blue.svg?style=flat-square)](https://gitter.im/DarkPark/stb)
+[![NPM version](https://img.shields.io/npm/v/cjs-wamp.svg?style=flat-square)](https://www.npmjs.com/package/cjs-wamp)
+[![Dependencies Status](https://img.shields.io/david/cjssdk/wamp.svg?style=flat-square)](https://david-dm.org/cjssdk/wamp)
+[![Gitter](https://img.shields.io/badge/gitter-join%20chat-blue.svg?style=flat-square)](https://gitter.im/cjssdk/wamp)
 
 
 [WAMP](http://wamp-proto.org/) lightweight implementation for both browser and server-side (with [ws](https://www.npmjs.com/package/ws) npm package).
 
-`wampi` extends [Emitter](https://github.com/stbsdk/emitter) interface.
+`wamp` extends [Emitter](https://github.com/stbsdk/emitter) interface.
 It does not create any WebSocket connections but uses existing one.
 
 
 ## Installation ##
 
 ```bash
-npm install wampi
+npm install cjs-wamp
 ```
 
 
@@ -24,20 +24,20 @@ npm install wampi
 Add the constructor to the scope:
 
 ```js
-var Wampi = require('wampi');
+var Wamp = require('cjs-wamp');
 ```
 
 Create an instance from some existing WebSocket connection:
 
 ```js
-var ws    = new WebSocket('ws://echo.websocket.org'),
-    wampi = new Wampi(ws);
+var ws   = new WebSocket('ws://echo.websocket.org'),
+	wamp = new Wamp(ws);
 ```
 
 Send message to execute remotely:
 
 ```js
-wampi.call('getInfo', {id: 128}, function ( error, result ) {
+wamp.call('getInfo', {id: 128}, function ( error, result ) {
 	// handle execution result
 });
 ```
@@ -45,7 +45,7 @@ wampi.call('getInfo', {id: 128}, function ( error, result ) {
 Serve remote request:
 
 ```js
-wampi.addListener('getData', function ( params, callback ) {
+wamp.addListener('getData', function ( params, callback ) {
 	// handle request ...
 	// send back results to the sender
 	callback(null, requestedData);
@@ -55,21 +55,27 @@ wampi.addListener('getData', function ( params, callback ) {
 Send notification with some optional data:
 
 ```js
-wampi.call('onUserUpdate', newUserData);
+wamp.call('onUserUpdate', newUserData);
 ```
 
 Serve received notification:
 
 ```js
-wampi.addListener('onUserUpdate', function ( event ) {
+wamp.addListener('onUserUpdate', function ( event ) {
 	// handle notification data ...
 });
+```
+
+Original WebSocket connection is also available:
+
+```js
+wamp.socket.send('some message');
 ```
 
 Catch the moment when WebSocket connection is ready:
 
 ```js
-wampi.socket.onopen = function() {
+wamp.socket.onopen = function() {
 	// send or receive messages here
 };
 ```
@@ -78,14 +84,14 @@ Server-side example with [ws](https://www.npmjs.com/package/ws) npm package:
 
 ```js
 var server = new require('ws').Server({port: 9000}),
-	Wampi  = require('wampi');
+	Wamp   = require('cjs-wamp');
 
 server.on('connection', function ( connection ) {
-	var wampi = new Wampi(connection);
+	var wamp = new Wamp(connection);
 
-	wampi.call('getInfo', {id: 128}, function ( error, result ) {
-    	// handle execution result
-    });
+	wamp.call('getInfo', {id: 128}, function ( error, result ) {
+		// handle execution result
+	});
 });
 ```
 
@@ -100,10 +106,10 @@ server.on('connection', function ( connection ) {
 
 ## Contribution ##
 
-If you have any problem or suggestion please open an issue [here](https://github.com/DarkPark/wampi/issues).
+If you have any problem or suggestion please open an issue [here](https://github.com/cjssdk/wamp/issues).
 Pull requests are welcomed with respect to the [JavaScript Code Style](https://github.com/DarkPark/jscs).
 
 
 ## License ##
 
-`wampi` is released under the [GPL-3.0 License](http://opensource.org/licenses/GPL-3.0).
+`wamp` is released under the [GPL-3.0 License](http://opensource.org/licenses/GPL-3.0).
