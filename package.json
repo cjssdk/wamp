@@ -1,12 +1,15 @@
 {
 	"name": "cjs-wamp",
-	"version": "1.0.3",
-	"description": "Web Application Messaging Protocol Implementation.",
+	"version": "1.0.4",
+	"description": "Web Application Messaging Protocol lightweight implementation.",
 	"author": {
 		"name": "Stanislav Kalashnik",
-		"email": "sk@infomir.eu"
+		"email": "darkpark.main@gmail.com"
 	},
-	"repository": "DarkPark/wampi",
+	"repository": "cjssdk/wamp",
+	"scripts": {
+		"test": "eslint ./*.js"
+	},
 	"dependencies": {
 		"stb-emitter": "1.*.*"
 	},
