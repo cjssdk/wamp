@@ -1,6 +1,6 @@
 {
-	"name": "wampi",
-	"version": "1.0.2",
+	"name": "cjs-wamp",
+	"version": "1.0.3",
 	"description": "Web Application Messaging Protocol Implementation.",
 	"author": {
 		"name": "Stanislav Kalashnik",
@@ -12,8 +12,10 @@
 	},
 	"devDependencies": {},
 	"keywords": [
+		"cjssdk",
 		"websocket",
 		"protocol",
+		"messaging",
 		"wamp"
 	],
 	"license": "GPL-3.0"
