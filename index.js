@@ -1,5 +1,4 @@
 /**
- * @module wampi
  * @author Stanislav Kalashnik <sk@infomir.eu>
  * @license GNU GENERAL PUBLIC LICENSE Version 3
  */
@@ -20,7 +19,7 @@ var Emitter   = require('stb-emitter'),
  * @see http://wamp-proto.org/
  * @constructor
  */
-function Wampi ( socket ) {
+function Wamp ( socket ) {
 	var self = this;
 
 	// parent constructor call
@@ -43,8 +42,8 @@ function Wampi ( socket ) {
 
 
 // inheritance
-Wampi.prototype = Object.create(Emitter.prototype);
-Wampi.prototype.constructor = Wampi;
+Wamp.prototype = Object.create(Emitter.prototype);
+Wamp.prototype.constructor = Wamp;
 
 
 /**
@@ -54,7 +53,7 @@ Wampi.prototype.constructor = Wampi;
  *
  * @private
  */
-Wampi.prototype.router = function ( message ) {
+Wamp.prototype.router = function ( message ) {
 	var self = this;
 
 	try {
@@ -118,7 +117,7 @@ Wampi.prototype.router = function ( message ) {
  * @param {*} params procedure associated data
  * @param {function} callback remote call results handler
  */
-Wampi.prototype.call = function ( method, params, callback ) {
+Wamp.prototype.call = function ( method, params, callback ) {
 	var message = {
 		jsonrpc: '2.0',
 		method: method
@@ -140,4 +139,4 @@ Wampi.prototype.call = function ( method, params, callback ) {
 
 
 // public
-module.exports = Wampi;
+module.exports = Wamp;
