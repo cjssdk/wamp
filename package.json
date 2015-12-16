@@ -8,14 +8,16 @@
 	},
 	"repository": "cjssdk/wamp",
 	"scripts": {
-		"test": "eslint ./*.js"
+		"lint": "eslint ./*.js"
 	},
 	"dependencies": {
-		"stb-emitter": "1.*.*"
+		"cjs-emitter": "1.*.*"
 	},
 	"devDependencies": {},
 	"keywords": [
-		"cjssdk",
+		"commonjs",
+		"sdk",
+		"framework",
 		"websocket",
 		"protocol",
 		"messaging",
