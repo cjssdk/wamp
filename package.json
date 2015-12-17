@@ -8,12 +8,17 @@
 	},
 	"repository": "cjssdk/wamp",
 	"scripts": {
-		"lint": "eslint ./*.js"
+		"lint": "eslint ./*.js",
+		"test": "node ./tests/main.js"
 	},
 	"dependencies": {
 		"cjs-emitter": "1.*.*"
 	},
-	"devDependencies": {},
+	"devDependencies": {
+		"mocha": "2.*.*",
+		"should": "8.*.*",
+		"ws": "0.*.*"
+	},
 	"keywords": [
 		"commonjs",
 		"sdk",
