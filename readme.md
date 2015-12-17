@@ -9,7 +9,7 @@ WAMP Implementation
 [WAMP](http://wamp-proto.org/) lightweight implementation for both browser and server-side (with [ws](https://www.npmjs.com/package/ws) npm package).
 
 `cjs-wamp` extends [Emitter](https://github.com/cjssdk/emitter) interface.
-It does not create any WebSocket connections but uses existing one.
+It does not create any WebSocket connections but uses an existing one.
 
 
 ## Installation ##
