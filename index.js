@@ -41,6 +41,23 @@ function Wamp ( socket ) {
 }
 
 
+/**
+ * Send data through the given socket.
+ *
+ * @param {WebSocket} socket pipe to send through
+ * @param {Object} message data to send
+ */
+function send ( socket, message ) {
+	// connection is open
+	if ( socket.readyState === 1 ) {
+		// protocol version
+		message.jsonrpc = '2.0';
+
+		socket.send(JSON.stringify(message));
+	}
+}
+
+
 // inheritance
 Wamp.prototype = Object.create(Emitter.prototype);
 Wamp.prototype.constructor = Wamp;
@@ -49,63 +66,60 @@ Wamp.prototype.constructor = Wamp;
 /**
  * Internal method to handle messages.
  *
- * @param {string} message JSON data
+ * @param {string} message request JSON data
  *
  * @private
  */
 Wamp.prototype.router = function ( message ) {
-	var self = this;
+	var self = this,
+		data;
 
 	try {
-		message = JSON.parse(message);
+		data = JSON.parse(message);
 	} catch ( e ) {
-		this.socket.send(JSON.stringify({
-			jsonrpc: '2.0',
+		send(this.socket, {
 			error: {code: -32700, message: 'Parse error'},
 			id: null
-		}));
+		});
 		return;
 	}
 
-	if ( 'id' in message && !('method' in message) ) {
+	if ( 'id' in data && !('method' in data) ) {
 		// incoming answer for previous request
-		if ( message.id in callbacks ) {
-			callbacks[message.id](message.error, message.result);
-			delete callbacks[message.id];
+		if ( data.id in callbacks ) {
+			callbacks[data.id](data.error, data.result);
+			delete callbacks[data.id];
 		} else {
 			// no callback registered for this id
 		}
-	} else if ( !('id' in message) && 'method' in message ) {
+	} else if ( !('id' in data) && 'method' in data ) {
 		// incoming notification
-		if ( this.events[message.method] ) {
-			this.emit(message.method, message.params);
+		if ( this.events[data.method] ) {
+			this.emit(data.method, data.params);
 		}
-	} else if ( 'id' in message && 'method' in message ) {
+	} else if ( 'id' in data && 'method' in data ) {
 		// execute incoming method and report to sender
-		if ( this.events[message.method] ) {
-			this.emit(message.method, message.params, function ( error, result ) {
-				self.socket.send(JSON.stringify({
-					jsonrpc: '2.0',
+		if ( this.events[data.method] ) {
+			this.emit(data.method, data.params, function ( error, result ) {
+				send(self.socket, {
 					error: error,
 					result: result,
-					id: message.id
-				}));
+					id: data.id
+				});
 			});
 		} else {
 			// wrong method
-			this.socket.send(JSON.stringify({
-				jsonrpc: '2.0',
+			send(this.socket, {
 				error: {code: -32601, message: 'Method not found'},
-				id: message.id
-			}));
+				id: data.id
+			});
 		}
 	} else {
 		// wrong request
-		this.socket.send(JSON.stringify({
-			jsonrpc: '2.0',
+		send(this.socket, {
 			error: {code: -32600, message: 'Invalid Request'},
 			id: null
-		}));
+		});
 	}
 };
 
@@ -119,13 +133,9 @@ Wamp.prototype.router = function ( message ) {
  */
 Wamp.prototype.call = function ( method, params, callback ) {
 	var message = {
-		jsonrpc: '2.0',
-		method: method
+		method: method,
+		params: params
 	};
-
-	if ( params ) {
-		message.params = params;
-	}
 
 	// execution mode with callback
 	// notification mode otherwise
@@ -134,7 +144,7 @@ Wamp.prototype.call = function ( method, params, callback ) {
 		callbacks[messageId] = callback;
 	}
 
-	this.socket.send(JSON.stringify(message));
+	send(this.socket, message);
 };
 
 
