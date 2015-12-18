@@ -32,14 +32,14 @@ Create an instance from some existing WebSocket connection:
 
 ```js
 var ws   = new WebSocket('ws://echo.websocket.org'),
-	wamp = new Wamp(ws);
+    wamp = new Wamp(ws);
 ```
 
 Send message to execute remotely:
 
 ```js
 wamp.call('getInfo', {id: 128}, function ( error, result ) {
-	// handle execution result
+    // handle execution result
 });
 ```
 
@@ -47,9 +47,9 @@ Serve remote request:
 
 ```js
 wamp.addListener('getData', function ( params, callback ) {
-	// handle request ...
-	// send back results to the sender
-	callback(null, requestedData);
+    // handle request ...
+    // send back results to the sender
+    callback(null, requestedData);
 });
 ```
 
@@ -63,7 +63,7 @@ Serve received notification:
 
 ```js
 wamp.addListener('onUserUpdate', function ( event ) {
-	// handle notification data ...
+    // handle notification data ...
 });
 ```
 
@@ -77,7 +77,7 @@ Catch the moment when WebSocket connection is ready:
 
 ```js
 wamp.socket.onopen = function() {
-	// send or receive messages here
+    // send or receive messages here
 };
 ```
 
@@ -85,14 +85,14 @@ Server-side example with [ws](https://www.npmjs.com/package/ws) npm package:
 
 ```js
 var server = new require('ws').Server({port: 9000}),
-	Wamp   = require('cjs-wamp');
+    Wamp   = require('cjs-wamp');
 
 server.on('connection', function ( connection ) {
-	var wamp = new Wamp(connection);
+    var wamp = new Wamp(connection);
 
-	wamp.call('getInfo', {id: 128}, function ( error, result ) {
-		// handle execution result
-	});
+    wamp.call('getInfo', {id: 128}, function ( error, result ) {
+        // handle execution result
+    });
 });
 ```
 
