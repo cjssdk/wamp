@@ -7,8 +7,6 @@
 
 'use strict';
 
-/* eslint-disable no-unused-vars */
-
 var Mocha  = require('mocha'),
 	mocha  = new Mocha({
 		reporter: 'spec',
