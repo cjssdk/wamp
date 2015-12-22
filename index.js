@@ -7,8 +7,8 @@
 
 /** @private */
 var Emitter   = require('cjs-emitter'),
-	messageId = 0,
-	callbacks = {};
+    messageId = 0,
+    callbacks = {};
 
 
 /**
@@ -20,24 +20,24 @@ var Emitter   = require('cjs-emitter'),
  * @constructor
  */
 function Wamp ( socket ) {
-	var self = this;
+    var self = this;
 
-	// parent constructor call
-	Emitter.call(this);
+    // parent constructor call
+    Emitter.call(this);
 
-	this.socket = socket;
+    this.socket = socket;
 
-	if ( 'on' in socket ) {
-		// server-side
-		socket.on('message', function ( message ) {
-			self.router(message);
-		});
-	} else if ( 'onmessage' in socket ) {
-		// desktop browser
-		socket.onmessage = function ( event ) {
-			self.router(event.data);
-		};
-	}
+    if ( 'on' in socket ) {
+        // server-side
+        socket.on('message', function ( message ) {
+            self.router(message);
+        });
+    } else if ( 'onmessage' in socket ) {
+        // desktop browser
+        socket.onmessage = function ( event ) {
+            self.router(event.data);
+        };
+    }
 }
 
 
@@ -48,13 +48,13 @@ function Wamp ( socket ) {
  * @param {Object} message data to send
  */
 function send ( socket, message ) {
-	// connection is open
-	if ( socket.readyState === 1 ) {
-		// protocol version
-		message.jsonrpc = '2.0';
+    // connection is open
+    if ( socket.readyState === 1 ) {
+        // protocol version
+        message.jsonrpc = '2.0';
 
-		socket.send(JSON.stringify(message));
-	}
+        socket.send(JSON.stringify(message));
+    }
 }
 
 
@@ -71,56 +71,56 @@ Wamp.prototype.constructor = Wamp;
  * @private
  */
 Wamp.prototype.router = function ( message ) {
-	var self = this,
-		data;
+    var self = this,
+        data;
 
-	try {
-		data = JSON.parse(message);
-	} catch ( e ) {
-		send(this.socket, {
-			error: {code: -32700, message: 'Parse error'},
-			id: null
-		});
-		return;
-	}
+    try {
+        data = JSON.parse(message);
+    } catch ( e ) {
+        send(this.socket, {
+            error: {code: -32700, message: 'Parse error'},
+            id: null
+        });
+        return;
+    }
 
-	if ( 'id' in data && !('method' in data) ) {
-		// incoming answer for previous request
-		if ( data.id in callbacks ) {
-			callbacks[data.id](data.error, data.result);
-			delete callbacks[data.id];
-		} else {
-			// no callback registered for this id
-		}
-	} else if ( !('id' in data) && 'method' in data ) {
-		// incoming notification
-		if ( this.events[data.method] ) {
-			this.emit(data.method, data.params);
-		}
-	} else if ( 'id' in data && 'method' in data ) {
-		// execute incoming method and report to sender
-		if ( this.events[data.method] ) {
-			this.emit(data.method, data.params, function ( error, result ) {
-				send(self.socket, {
-					error: error,
-					result: result,
-					id: data.id
-				});
-			});
-		} else {
-			// wrong method
-			send(this.socket, {
-				error: {code: -32601, message: 'Method not found'},
-				id: data.id
-			});
-		}
-	} else {
-		// wrong request
-		send(this.socket, {
-			error: {code: -32600, message: 'Invalid Request'},
-			id: null
-		});
-	}
+    if ( 'id' in data && !('method' in data) ) {
+        // incoming answer for previous request
+        if ( data.id in callbacks ) {
+            callbacks[data.id](data.error, data.result);
+            delete callbacks[data.id];
+        } else {
+            // no callback registered for this id
+        }
+    } else if ( !('id' in data) && 'method' in data ) {
+        // incoming notification
+        if ( this.events[data.method] ) {
+            this.emit(data.method, data.params);
+        }
+    } else if ( 'id' in data && 'method' in data ) {
+        // execute incoming method and report to sender
+        if ( this.events[data.method] ) {
+            this.emit(data.method, data.params, function ( error, result ) {
+                send(self.socket, {
+                    error: error,
+                    result: result,
+                    id: data.id
+                });
+            });
+        } else {
+            // wrong method
+            send(this.socket, {
+                error: {code: -32601, message: 'Method not found'},
+                id: data.id
+            });
+        }
+    } else {
+        // wrong request
+        send(this.socket, {
+            error: {code: -32600, message: 'Invalid Request'},
+            id: null
+        });
+    }
 };
 
 
@@ -132,19 +132,19 @@ Wamp.prototype.router = function ( message ) {
  * @param {function} [callback] remote call results handler
  */
 Wamp.prototype.call = function ( method, params, callback ) {
-	var message = {
-		method: method,
-		params: params
-	};
+    var message = {
+        method: method,
+        params: params
+    };
 
-	// execution mode with callback
-	// notification mode otherwise
-	if ( typeof callback === 'function' ) {
-		message.id = ++messageId;
-		callbacks[messageId] = callback;
-	}
+    // execution mode with callback
+    // notification mode otherwise
+    if ( typeof callback === 'function' ) {
+        message.id = ++messageId;
+        callbacks[messageId] = callback;
+    }
 
-	send(this.socket, message);
+    send(this.socket, message);
 };
 
 

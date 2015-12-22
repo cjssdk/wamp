@@ -1,33 +1,33 @@
 {
-	"name": "cjs-wamp",
-	"version": "1.2.0",
-	"description": "Web Application Messaging Protocol lightweight implementation.",
-	"author": {
-		"name": "Stanislav Kalashnik",
-		"email": "darkpark.main@gmail.com"
-	},
-	"repository": "cjssdk/wamp",
-	"scripts": {
-		"lint": "eslint ./*.js",
-		"test": "node ./tests/main.js"
-	},
-	"dependencies": {
-		"cjs-emitter": "1.*.*"
-	},
-	"devDependencies": {
-		"mocha": "2.*.*",
-		"should": "8.*.*",
-		"ws": "0.*.*"
-	},
-	"keywords": [
-		"commonjs",
-		"sdk",
-		"cjssdk",
-		"framework",
-		"websocket",
-		"protocol",
-		"messaging",
-		"wamp"
-	],
-	"license": "GPL-3.0"
+    "name": "cjs-wamp",
+    "version": "1.2.0",
+    "description": "Web Application Messaging Protocol lightweight implementation.",
+    "author": {
+        "name": "Stanislav Kalashnik",
+        "email": "darkpark.main@gmail.com"
+    },
+    "repository": "cjssdk/wamp",
+    "scripts": {
+        "lint": "eslint ./*.js",
+        "test": "node ./tests/main.js"
+    },
+    "dependencies": {
+        "cjs-emitter": "1.*.*"
+    },
+    "devDependencies": {
+        "mocha": "2.*.*",
+        "should": "8.*.*",
+        "ws": "0.*.*"
+    },
+    "keywords": [
+        "commonjs",
+        "sdk",
+        "cjssdk",
+        "framework",
+        "websocket",
+        "protocol",
+        "messaging",
+        "wamp"
+    ],
+    "license": "GPL-3.0"
 }
