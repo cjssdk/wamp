@@ -16,9 +16,11 @@
         "cjs-emitter": "1.*.*"
     },
     "devDependencies": {
+        "bufferutil": "1.*.*",
         "mocha": "2.*.*",
         "should": "8.*.*",
-        "ws": "0.*.*"
+        "utf-8-validate": "1.*.*",
+        "ws": "1.*.*"
     },
     "keywords": [
         "commonjs",
