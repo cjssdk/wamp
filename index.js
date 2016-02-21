@@ -76,7 +76,7 @@ Wamp.prototype.router = function ( message ) {
 
     try {
         data = JSON.parse(message);
-    } catch ( e ) {
+    } catch ( error ) {
         send(this.socket, {
             error: {code: -32700, message: 'Parse error'},
             id: null
