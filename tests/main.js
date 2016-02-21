@@ -31,8 +31,9 @@ server.on('listening', function listening () {
 
     // exec
     mocha.run(function ( failures ) {
-        // return exit code
-        process.exit(failures);
+        if ( failures ) {
+            process.exitCode = 1;
+        }
     });
 });
 
