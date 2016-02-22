@@ -34,6 +34,9 @@ server.on('listening', function listening () {
         if ( failures ) {
             process.exitCode = 1;
         }
+
+        // stop websocket server
+        server.close();
     });
 });
 
