@@ -17,6 +17,7 @@
     },
     "devDependencies": {
         "bufferutil": "1.*.*",
+        "cjs-eslint-config": "cjssdk/eslint-config",
         "mocha": "2.*.*",
         "should": "8.*.*",
         "utf-8-validate": "1.*.*",
