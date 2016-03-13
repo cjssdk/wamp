@@ -43,11 +43,7 @@ server.on('listening', function listening () {
 
 // serve requests
 server.on('connection', function connection ( connection ) {
-    // wrap
-    connection = new Wamp(connection);
-
-    // API methods and events
-    connection.addListeners({
+    var methods = {
         getTrue: function ( params, callback ) {
             callback(null, true);
         },
@@ -77,5 +73,13 @@ server.on('connection', function connection ( connection ) {
                 callback(error, result);
             });
         }
+    };
+
+    // wrap
+    connection = new Wamp(connection);
+
+    // apply all listeners
+    Object.keys(methods).forEach(function ( name ) {
+        connection.addListener(name, methods[name]);
     });
 });
