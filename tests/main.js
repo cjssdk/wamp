@@ -18,7 +18,7 @@ var Mocha  = require('mocha'),
     Wamp   = require('../index');
 
 
-global.DEBUG = true;
+global.DEVELOP = true;
 
 
 // ready
