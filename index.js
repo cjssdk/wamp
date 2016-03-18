@@ -22,6 +22,8 @@ var Emitter   = require('cjs-emitter'),
 function Wamp ( socket ) {
     var self = this;
 
+    console.assert(typeof this === 'object', 'must be constructed via new');
+    
     // parent constructor call
     Emitter.call(this);
 
@@ -81,6 +83,7 @@ Wamp.prototype.router = function ( message ) {
             error: {code: -32700, message: 'Parse error'},
             id: null
         });
+
         return;
     }
 
