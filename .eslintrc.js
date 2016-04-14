@@ -1,6 +1,6 @@
 /**
- * @author Stanislav Kalashnik <darkpark.main@gmail.com>
- * @license GNU GENERAL PUBLIC LICENSE Version 3
+ * @license The MIT License (MIT)
+ * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
  */
 
 'use strict';
