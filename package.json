@@ -6,7 +6,10 @@
         "name": "Stanislav Kalashnik",
         "email": "darkpark.main@gmail.com"
     },
-    "repository": "cjssdk/wamp",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cjssdk/wamp.git"
+    },
     "scripts": {
         "lint": "eslint ./*.js",
         "test": "node ./tests/main.js",
