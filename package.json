@@ -12,7 +12,8 @@
     },
     "scripts": {
         "lint": "eslint ./*.js",
-        "test": "node ./tests/main.js",
+        "mocha": "node ./tests/main.js",
+        "test": "npm run mocha && npm run lint",
         "jsdoc": "jsdoc --destination doc *.js readme.md"
     },
     "dependencies": {
@@ -21,6 +22,7 @@
     "devDependencies": {
         "bufferutil": "1.*.*",
         "cjs-eslint-config": "cjssdk/eslint-config",
+        "eslint": "2.*.*",
         "mocha": "3.*.*",
         "should": "11.*.*",
         "utf-8-validate": "1.*.*",
