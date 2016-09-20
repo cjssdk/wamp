@@ -22,7 +22,7 @@
     "devDependencies": {
         "bufferutil": "1.*.*",
         "cjs-eslint-config": "cjssdk/eslint-config",
-        "eslint": "2.*.*",
+        "eslint": "3.*.*",
         "mocha": "3.*.*",
         "should": "11.*.*",
         "utf-8-validate": "1.*.*",
