@@ -17,7 +17,7 @@
         "jsdoc": "jsdoc --destination doc *.js readme.md"
     },
     "dependencies": {
-        "cjs-emitter": "cjssdk/emitter"
+        "cjs-emitter": "1.*.*"
     },
     "devDependencies": {
         "bufferutil": "1.*.*",
