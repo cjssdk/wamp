@@ -1,9 +1,10 @@
 WAMP Implementation
 ===================
 
-[![Build Status](https://img.shields.io/travis/cjssdk/wamp.svg?style=flat-square)](https://travis-ci.org/cjssdk/wamp)
-[![NPM version](https://img.shields.io/npm/v/cjs-wamp.svg?style=flat-square)](https://www.npmjs.com/package/cjs-wamp)
-[![Dependencies Status](https://img.shields.io/david/cjssdk/wamp.svg?style=flat-square)](https://david-dm.org/cjssdk/wamp)
+[![build status](https://img.shields.io/travis/cjssdk/wamp.svg?style=flat-square)](https://travis-ci.org/cjssdk/wamp)
+[![npm version](https://img.shields.io/npm/v/cjs-wamp.svg?style=flat-square)](https://www.npmjs.com/package/cjs-wamp)
+[![dependencies status](https://img.shields.io/david/cjssdk/wamp.svg?style=flat-square)](https://david-dm.org/cjssdk/wamp)
+[![devDependencies status](https://img.shields.io/david/dev/cjssdk/wamp.svg?style=flat-square)](https://david-dm.org/cjssdk/wamp?type=dev)
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-blue.svg?style=flat-square)](https://gitter.im/DarkPark/cjssdk)
 [![RunKit](https://img.shields.io/badge/RunKit-try-yellow.svg?style=flat-square)](https://runkit.com/npm/cjs-wamp)
 
