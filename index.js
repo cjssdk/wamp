@@ -23,7 +23,7 @@ function Wamp ( socket ) {
     var self = this;
 
     console.assert(typeof this === 'object', 'must be constructed via new');
-    
+
     // parent constructor call
     Emitter.call(this);
 
@@ -32,30 +32,13 @@ function Wamp ( socket ) {
     if ( 'on' in socket ) {
         // server-side
         socket.on('message', function ( message ) {
-            self.router(message);
+            self.route(message);
         });
     } else if ( 'onmessage' in socket ) {
         // desktop browser
         socket.onmessage = function ( event ) {
-            self.router(event.data);
+            self.route(event.data);
         };
-    }
-}
-
-
-/**
- * Send data through the given socket.
- *
- * @param {WebSocket} socket pipe to send through
- * @param {Object} message data to send
- */
-function send ( socket, message ) {
-    // connection is open
-    if ( socket.readyState === 1 ) {
-        // protocol version
-        message.jsonrpc = '2.0';
-
-        socket.send(JSON.stringify(message));
     }
 }
 
@@ -66,20 +49,41 @@ Wamp.prototype.constructor = Wamp;
 
 
 /**
+ * Send data through the given socket.
+ * Should be overridden in the
+ *
+ * @param {Object} message data to send
+ *
+ * @abstract
+ */
+Wamp.prototype.send = function ( message ) {
+    throw new Error('must be implemented!');
+
+    // connection is open
+    if ( this.socket.readyState === 1 ) {
+        // protocol version
+        message.jsonrpc = '2.0';
+
+        this.socket.send(JSON.stringify(message));
+    }
+};
+
+
+/**
  * Internal method to handle messages.
  *
  * @param {string} message request JSON data
  *
  * @private
  */
-Wamp.prototype.router = function ( message ) {
+Wamp.prototype.route = function ( message ) {
     var self = this,
         data;
 
     try {
         data = JSON.parse(message);
     } catch ( error ) {
-        send(this.socket, {
+        this.send({
             error: {code: -32700, message: 'Parse error'},
             id: null
         });
@@ -104,7 +108,7 @@ Wamp.prototype.router = function ( message ) {
         // execute incoming method and report to sender
         if ( this.events[data.method] ) {
             this.emit(data.method, data.params, function ( error, result ) {
-                send(self.socket, {
+                self.send({
                     error: error,
                     result: result,
                     id: data.id
@@ -112,14 +116,14 @@ Wamp.prototype.router = function ( message ) {
             });
         } else {
             // wrong method
-            send(this.socket, {
+            this.send({
                 error: {code: -32601, message: 'Method not found'},
                 id: data.id
             });
         }
     } else {
         // wrong request
-        send(this.socket, {
+        this.send({
             error: {code: -32600, message: 'Invalid Request'},
             id: null
         });
@@ -147,7 +151,7 @@ Wamp.prototype.call = function ( method, params, callback ) {
         callbacks[messageId] = callback;
     }
 
-    send(this.socket, message);
+    this.send(message);
 };
 
 
