@@ -32,13 +32,30 @@ function Wamp ( socket ) {
     if ( 'on' in socket ) {
         // server-side
         socket.on('message', function ( message ) {
-            self.route(message);
+            self.router(message);
         });
     } else if ( 'onmessage' in socket ) {
         // desktop browser
         socket.onmessage = function ( event ) {
-            self.route(event.data);
+            self.router(event.data);
         };
+    }
+}
+
+
+/**
+ * Send data through the given socket.
+ *
+ * @param {WebSocket} socket pipe to send through
+ * @param {Object} message data to send
+ */
+function send ( socket, message ) {
+    // connection is open
+    if ( socket.readyState === 1 ) {
+        // protocol version
+        message.jsonrpc = '2.0';
+
+        socket.send(JSON.stringify(message));
     }
 }
 
@@ -49,41 +66,20 @@ Wamp.prototype.constructor = Wamp;
 
 
 /**
- * Send data through the given socket.
- * Should be overridden in the
- *
- * @param {Object} message data to send
- *
- * @abstract
- */
-Wamp.prototype.send = function ( message ) {
-    throw new Error('must be implemented!');
-
-    // connection is open
-    if ( this.socket.readyState === 1 ) {
-        // protocol version
-        message.jsonrpc = '2.0';
-
-        this.socket.send(JSON.stringify(message));
-    }
-};
-
-
-/**
  * Internal method to handle messages.
  *
  * @param {string} message request JSON data
  *
  * @private
  */
-Wamp.prototype.route = function ( message ) {
+Wamp.prototype.router = function ( message ) {
     var self = this,
         data;
 
     try {
         data = JSON.parse(message);
     } catch ( error ) {
-        this.send({
+        send(this.socket, {
             error: {code: -32700, message: 'Parse error'},
             id: null
         });
@@ -108,7 +104,7 @@ Wamp.prototype.route = function ( message ) {
         // execute incoming method and report to sender
         if ( this.events[data.method] ) {
             this.emit(data.method, data.params, function ( error, result ) {
-                self.send({
+                send(self.socket, {
                     error: error,
                     result: result,
                     id: data.id
@@ -116,14 +112,14 @@ Wamp.prototype.route = function ( message ) {
             });
         } else {
             // wrong method
-            this.send({
+            send(this.socket, {
                 error: {code: -32601, message: 'Method not found'},
                 id: data.id
             });
         }
     } else {
         // wrong request
-        this.send({
+        send(this.socket, {
             error: {code: -32600, message: 'Invalid Request'},
             id: null
         });
@@ -151,7 +147,7 @@ Wamp.prototype.call = function ( method, params, callback ) {
         callbacks[messageId] = callback;
     }
 
-    this.send(message);
+    send(this.socket, message);
 };
 
 
