@@ -25,7 +25,7 @@
         "eslint": "3.*.*",
         "mocha": "3.*.*",
         "should": "11.*.*",
-        "utf-8-validate": "1.*.*",
+        "utf-8-validate": "2.*.*",
         "ws": "1.*.*"
     },
     "keywords": [
