@@ -20,13 +20,13 @@
         "cjs-emitter": "1.*.*"
     },
     "devDependencies": {
-        "bufferutil": "1.*.*",
+        "bufferutil": "3.*.*",
         "cjs-eslint-config": "1.*.*",
-        "eslint": "3.*.*",
+        "eslint": "4.*.*",
         "mocha": "3.*.*",
         "should": "11.*.*",
-        "utf-8-validate": "2.*.*",
-        "ws": "1.*.*"
+        "utf-8-validate": "3.*.*",
+        "ws": "3.*.*"
     },
     "keywords": [
         "commonjs",
