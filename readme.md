@@ -86,7 +86,7 @@ wamp.socket.onopen = function() {
 Server-side example with [ws](https://www.npmjs.com/package/ws) npm package:
 
 ```js
-var server = new require('ws').Server({port: 9000}),
+var server = new (require('ws').Server)({port: 9000}),
     Wamp   = require('cjs-wamp');
 
 server.on('connection', function ( connection ) {
