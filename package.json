@@ -23,8 +23,8 @@
         "bufferutil": "3.*.*",
         "cjs-eslint-config": "1.*.*",
         "eslint": "4.*.*",
-        "mocha": "3.*.*",
-        "should": "11.*.*",
+        "mocha": "4.*.*",
+        "should": "13.*.*",
         "utf-8-validate": "3.*.*",
         "ws": "3.*.*"
     },
