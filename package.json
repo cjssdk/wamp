@@ -14,7 +14,7 @@
         "lint": "eslint .",
         "mocha": "node ./tests/main.js",
         "test": "npm run mocha && npm run lint",
-        "jsdoc": "jsdoc --destination doc *.js readme.md"
+        "jsdoc": "jsdoc --destination docs *.js readme.md"
     },
     "dependencies": {
         "cjs-emitter": "1.*.*"
