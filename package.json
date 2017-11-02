@@ -23,6 +23,7 @@
         "bufferutil": "3.*.*",
         "cjs-eslint-config": "1.*.*",
         "eslint": "4.*.*",
+        "jsdoc": "3.*.*",
         "mocha": "4.*.*",
         "should": "13.*.*",
         "utf-8-validate": "3.*.*",
