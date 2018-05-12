@@ -133,10 +133,10 @@ describe('General tests', function () {
         wamp.call('getString', null, function ( error, result ) {
             should.not.exist(error);
 
-            lastMessage.should.containDeep({error: null, result: 'cjs-wamp', id: 8, jsonrpc: '2.0'});
+            lastMessage.should.containDeep({error: null, result: '@cjssdk/wamp', id: 8, jsonrpc: '2.0'});
 
             should.exist(result);
-            result.should.equal('cjs-wamp');
+            result.should.equal('@cjssdk/wamp');
 
             done();
         });

@@ -57,7 +57,7 @@ server.on('connection', function connection ( connection ) {
         },
 
         getString: function ( params, callback ) {
-            callback(null, 'cjs-wamp');
+            callback(null, '@cjssdk/wamp');
         },
 
         getError: function ( params, callback ) {
