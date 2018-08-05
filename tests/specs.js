@@ -2,7 +2,7 @@
  * Mocha tests.
  *
  * @license The MIT License (MIT)
- * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+ * @author Stanislav Kalashnik <darkpark.main@gmail.com>
  */
 
 'use strict';
@@ -133,10 +133,10 @@ describe('General tests', function () {
         wamp.call('getString', null, function ( error, result ) {
             should.not.exist(error);
 
-            lastMessage.should.containDeep({error: null, result: '@cjssdk/wamp', id: 8, jsonrpc: '2.0'});
+            lastMessage.should.containDeep({error: null, result: 'cjs-wamp', id: 8, jsonrpc: '2.0'});
 
             should.exist(result);
-            result.should.equal('@cjssdk/wamp');
+            result.should.equal('cjs-wamp');
 
             done();
         });

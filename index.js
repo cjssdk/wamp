@@ -1,12 +1,12 @@
 /**
  * @license The MIT License (MIT)
- * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+ * @author Stanislav Kalashnik <darkpark.main@gmail.com>
  */
 
 'use strict';
 
 /** @private */
-var Emitter   = require('@cjssdk/emitter'),
+var Emitter   = require('cjs-emitter'),
     messageId = 0,
     callbacks = {};
 

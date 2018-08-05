@@ -1,6 +1,6 @@
 /**
  * @license The MIT License (MIT)
- * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+ * @author Stanislav Kalashnik <darkpark.main@gmail.com>
  */
 
 'use strict';
@@ -8,5 +8,5 @@
 // public
 module.exports = {
     // base rules
-    extends: require.resolve('@cjssdk/eslint-config/.eslintrc.js')
+    extends: require.resolve('cjs-eslint')
 };

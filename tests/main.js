@@ -2,7 +2,7 @@
  * Mocha tests entry point.
  *
  * @license The MIT License (MIT)
- * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+ * @author Stanislav Kalashnik <darkpark.main@gmail.com>
  */
 
 'use strict';
@@ -57,7 +57,7 @@ server.on('connection', function connection ( connection ) {
         },
 
         getString: function ( params, callback ) {
-            callback(null, '@cjssdk/wamp');
+            callback(null, 'cjs-wamp');
         },
 
         getError: function ( params, callback ) {
