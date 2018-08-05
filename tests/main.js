@@ -42,6 +42,7 @@ server.on('listening', function listening () {
 
 
 // serve requests
+// eslint-disable-next-line no-shadow
 server.on('connection', function connection ( connection ) {
     var methods = {
         getTrue: function ( params, callback ) {
