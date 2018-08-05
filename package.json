@@ -1,5 +1,5 @@
 {
-    "name": "@cjssdk/wamp",
+    "name": "cjs-wamp",
     "version": "1.3.1",
     "description": "Web Application Messaging Protocol lightweight implementation.",
     "author": {
@@ -10,9 +10,6 @@
         "type": "git",
         "url": "https://github.com/cjssdk/wamp.git"
     },
-    "publishConfig": {
-        "access": "public"
-    },
     "scripts": {
         "lint": "eslint --ignore-pattern '/docs/' .",
         "mocha": "node ./tests/main.js",
@@ -20,17 +17,16 @@
         "jsdoc": "jsdoc --destination docs *.js readme.md"
     },
     "dependencies": {
-        "@cjssdk/emitter": "1.*.*"
+        "cjs-emitter": "^1.5.3"
     },
     "devDependencies": {
-        "bufferutil": "3.*.*",
-        "@cjssdk/eslint-config": "1.*.*",
-        "eslint": "4.*.*",
-        "jsdoc": "3.*.*",
-        "mocha": "5.*.*",
-        "should": "13.*.*",
-        "utf-8-validate": "3.*.*",
-        "ws": "3.*.*"
+        "bufferutil": "^4.0.0",
+        "cjs-eslint": "^1.1.1",
+        "jsdoc": "^3.5.5",
+        "mocha": "^5.2.0",
+        "should": "^13.2.3",
+        "utf-8-validate": "^5.0.1",
+        "ws": "^6.0.0"
     },
     "keywords": [
         "commonjs",

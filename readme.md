@@ -2,23 +2,23 @@ WAMP Implementation
 ===================
 
 [![build status](https://img.shields.io/travis/cjssdk/wamp.svg?style=flat-square)](https://travis-ci.org/cjssdk/wamp)
-[![npm version](https://img.shields.io/npm/v/@cjssdk/wamp.svg?style=flat-square)](https://www.npmjs.com/package/@cjssdk/wamp)
+[![npm version](https://img.shields.io/npm/v/cjs-wamp.svg?style=flat-square)](https://www.npmjs.com/package/cjs-wamp)
 [![dependencies status](https://img.shields.io/david/cjssdk/wamp.svg?style=flat-square)](https://david-dm.org/cjssdk/wamp)
 [![devDependencies status](https://img.shields.io/david/dev/cjssdk/wamp.svg?style=flat-square)](https://david-dm.org/cjssdk/wamp?type=dev)
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-blue.svg?style=flat-square)](https://gitter.im/DarkPark/cjssdk)
-[![RunKit](https://img.shields.io/badge/RunKit-try-yellow.svg?style=flat-square)](https://npm.runkit.com/@cjssdk/wamp)
+[![RunKit](https://img.shields.io/badge/RunKit-try-yellow.svg?style=flat-square)](https://npm.runkit.com/cjs-wamp)
 
 
 [WAMP](http://wamp-proto.org/) lightweight implementation for both browser and server-side (with [ws](https://www.npmjs.com/package/ws) npm package).
 
-`@cjssdk/wamp` extends [Emitter](https://github.com/cjssdk/emitter) interface.
+`cjs-wamp` extends [Emitter](https://github.com/cjssdk/emitter) interface.
 It does not create any WebSocket connections but uses an existing one.
 
 
 ## Installation ##
 
 ```bash
-npm install @cjssdk/wamp
+npm install cjs-wamp
 ```
 
 
@@ -27,7 +27,7 @@ npm install @cjssdk/wamp
 Add the constructor to the scope:
 
 ```js
-var Wamp = require('@cjssdk/wamp');
+var Wamp = require('cjs-wamp');
 ```
 
 Create an instance from some existing WebSocket connection:
@@ -87,7 +87,7 @@ Server-side example with [ws](https://www.npmjs.com/package/ws) npm package:
 
 ```js
 var server = new (require('ws').Server)({port: 9000}),
-    Wamp   = require('@cjssdk/wamp');
+    Wamp   = require('cjs-wamp');
 
 server.on('connection', function ( connection ) {
     var wamp = new Wamp(connection);
@@ -115,4 +115,4 @@ according to the contribution [rules](.github/contributing.md).
 
 ## License ##
 
-`@cjssdk/wamp` is released under the [MIT License](license.md).
+`cjs-wamp` is released under the [MIT License](license.md).
