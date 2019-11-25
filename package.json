@@ -20,13 +20,13 @@
         "cjs-emitter": "^1.5.3"
     },
     "devDependencies": {
-        "bufferutil": "^4.0.0",
-        "cjs-eslint": "^1.1.1",
-        "jsdoc": "^3.5.5",
-        "mocha": "^5.2.0",
+        "bufferutil": "^4.0.1",
+        "cjs-eslint": "^1.2.4",
+        "jsdoc": "^3.6.3",
+        "mocha": "^6.2.2",
         "should": "^13.2.3",
-        "utf-8-validate": "^5.0.1",
-        "ws": "^6.0.0"
+        "utf-8-validate": "^5.0.2",
+        "ws": "^7.2.0"
     },
     "keywords": [
         "commonjs",
