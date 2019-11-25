@@ -14,10 +14,10 @@ var Emitter   = require('cjs-emitter'),
 /**
  * Lightweight WAMP implementation based on WebSockets.
  *
- * @param {WebSocket} socket link to socket connection to wrap
+ * @param {WebSocket} socket - link to socket connection to wrap
  *
  * @see http://wamp-proto.org/
- * @constructor
+ * @class
  */
 function Wamp ( socket ) {
     var self = this;
@@ -46,8 +46,8 @@ function Wamp ( socket ) {
 /**
  * Send data through the given socket.
  *
- * @param {WebSocket} socket pipe to send through
- * @param {Object} message data to send
+ * @param {WebSocket} socket - pipe to send through
+ * @param {Object} message - data to send
  */
 function send ( socket, message ) {
     // connection is open
@@ -68,7 +68,7 @@ Wamp.prototype.constructor = Wamp;
 /**
  * Internal method to handle messages.
  *
- * @param {string} message request JSON data
+ * @param {string} message - request JSON data
  *
  * @private
  */
@@ -130,9 +130,9 @@ Wamp.prototype.router = function ( message ) {
 /**
  * Send message to execute remotely or notify (without `callback` argument).
  *
- * @param {string} method procedure or event name
- * @param {*} [params] procedure associated data
- * @param {function} [callback] remote call results handler
+ * @param {string} method - procedure or event name
+ * @param {*} [params] - procedure associated data
+ * @param {function} [callback] - remote call results handler
  */
 Wamp.prototype.call = function ( method, params, callback ) {
     var message = {

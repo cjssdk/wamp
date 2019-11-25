@@ -20,7 +20,7 @@ var should    = require('should'),
 describe('General tests', function () {
 
     before(function ( done ) {
-        var socket = new WebSocket('ws://localhost:9090/');
+        var socket = new WebSocket('ws://localhost:7070/');
 
         socket.on('message', function ( message ) {
             lastMessage = JSON.parse(message);

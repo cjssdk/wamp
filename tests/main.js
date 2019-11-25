@@ -14,7 +14,7 @@ var Mocha  = require('mocha'),
         bail: true,
         fullTrace: true
     }),
-    server = new (require('ws').Server)({port: 9090}),
+    server = new (require('ws').Server)({port: 7070}),
     Wamp   = require('../index');
 
 
